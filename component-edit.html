@@ -1,0 +1,49 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/mp-slider/mp-slider.html">
+
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+<dom-module id="component-edit">
+  <template>
+    <style>
+    </style>
+    <h1>Mis Contactos</h1>
+    <div>
+      <mp-slider controls bullets show-thumbs>
+          <div>
+              <img src="../img/Joana_12.jpg" />
+              <mp-caption slider-header="Joana"
+                          slider-content="Sister">
+              </mp-caption>
+          </div>
+
+          <div>
+              <img src="../img/Juan_1.png" />
+              <mp-caption slider-header="Juan" slider-content="BoyFriend"></mp-caption>
+          </div>
+
+          <div>
+              <img src="../img/Daniel_11.png" />
+              <mp-caption slider-header="Daniel" slider-content="I hate you"></mp-caption>
+          </div>
+      </mp-slider>
+    </div>
+  </template>
+
+  <script>
+    class ComponentEdit extends Polymer.Element {
+      static get is() { return 'component-edit'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'component-edit'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(ComponentEdit.is, ComponentEdit);
+  </script>
+
+</dom-module>
