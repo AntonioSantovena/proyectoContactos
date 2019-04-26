@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="list-contactos">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h1>Lista de contactos</h1>
+
+    <table border="4px">
+      <th>Datos</th>
+      <th>Imagen</th>
+      <tbody>
+        <tr>
+          <td>Antonio</td>
+          <td>Imagen</td>
+        </tr>
+        <tr>
+          <td>Lui</td>
+          <td>Imagen</td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+
+
+
+  <script>
+    /**
+     * `agenda-usuario`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ListContactos extends Polymer.Element {
+      static get is() { return 'list-contactos'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'list-contactos'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(ListContactos.is, ListContactos);
+  </script>
+</dom-module>
