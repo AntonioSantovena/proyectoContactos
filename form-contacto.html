@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="form-contacto.html">
+<dom-module id="form-contacto">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello  [[prop1]]</h2>
+  </template>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+  <script>
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAIaYbSp2stEDUR1XQdn-OcO0vRQDi_wxk",
+        authDomain: "my-project-1511800376281.firebaseapp.com",
+        databaseURL: "https://my-project-1511800376281.firebaseio.com",
+        projectId: "my-project-1511800376281",
+        storageBucket: "my-project-1511800376281.appspot.com",
+        messagingSenderId: "549060527811"
+      };
+      firebase.initializeApp(config);
+    class FormContacto extends Polymer.Element {
+      static get is() { return 'form-contacto'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'form-contacto'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(FormContacto.is, FormContacto);
+  </script>
+</dom-module>
