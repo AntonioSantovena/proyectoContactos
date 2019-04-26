@@ -24,9 +24,9 @@
     <h3 id="titleNuevo">
       Nuevo Contacto
     </h3>
-  <!--  <h2 id="titleModificar">
-      Editar Contacto  djsdj
-    </h2>-->
+    <h2 id="titleModificar">
+      Editar Contacto
+    </h2>
 
 
     <table class="tabla">
@@ -59,7 +59,7 @@
   <div class="botonera">
   <button class="buton" id="botonNew" onclick="agregar()">Agregar</button>
     <button class="buton" id="botonUpdate" onclick="guardaCambios()">Guardar</button>
-    <button class="buton" onclick="salir()">Salir</button>
+    <button class="buton" on-click="salir">Salir</button>
   </div>
 
 <!--
@@ -75,7 +75,6 @@
 <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
   <script>
 
-      // Initialize Firebase
 
     class FormContacto extends Polymer.Element {
       static get is() { return 'form-contacto'; }
@@ -83,26 +82,41 @@
         return {
           prop1: {
             type: String,
-            value: 'form-contacto'
+            value: 'form-contacto',
+            notify: true
+          },
+          salida: {
+            type: String,
+            notify: true
+          },
+          tipo: {
+            type: String,
+            observer: "validaTipo"
           }
         };
       }
-      ready(){
-    /**    super.ready();
-        var config = {
-          apiKey: "AIzaSyAIaYbSp2stEDUR1XQdn-OcO0vRQDi_wxk",
-          authDomain: "my-project-1511800376281.firebaseapp.com",
-          databaseURL: "https://my-project-1511800376281.firebaseio.com",
-          projectId: "my-project-1511800376281",
-          storageBucket: "my-project-1511800376281.appspot.com",
-          messagingSenderId: "549060527811"
-        };
-        firebase.initializeApp(config);
-        var db = firebase.database();
-var ref = db.ref("data~2Fcontactos");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-});**/
+      ready() {
+        super.ready();
+
+      }
+      validaTipo(){
+        var valor= this.tipo;
+        if(valor=='new'){
+          console.log("nuevoContacto");
+          this.$.titleNuevo.style.display = "flex";
+          this.$.titleModificar.style.display = "none";
+          this.$.botonNew.style.display = "inline-flex";
+          this.$.botonUpdate.style.display = "none";
+        }else if(valor=='edit'){
+          console.log("editaContacto");
+          this.$.titleNuevo.style.display = "none";
+          this.$.titleModificar.style.display = "flex";
+          this.$.botonNew.style.display = "none";
+          this.$.botonUpdate.style.display = "inline-flex";
+        }
+      }
+      salir(){
+        this.salida = 'none';
       }
     }
 

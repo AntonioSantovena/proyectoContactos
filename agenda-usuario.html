@@ -1,11 +1,12 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="stylesheet" href="/style.css"/>
 <link rel="import" href="../list-contactos.html">
-
+<link rel="import" href="../form-contacto.html">
 <dom-module id="agenda-usuario">
   <template>
     <style>
       .modal{
+        display: flex;
       z-index:3;
       padding-top:100px;
       position:fixed;
@@ -91,15 +92,17 @@
     <!---->
     </div>
     <div class="nuevoContacto">
-      <button class="botones" type="button" name="button" on-click="abreModal">Nuevo contacto</button>
+      <button class="botones" type="button" name="button" on-click="nuevoRegistro">Nuevo contacto</button>
+      <button class="botones" type="button" name="button" on-click="editaRegistro">Edita contacto</button>
+
     </div>
     <div class="section2">
     <list-contactos></list-contactos>
     </div>
     </div>
     <div class="modal" id="modal" style="display: {{visible}}">
-      <div class="tablanuevo">
-        <form-contacto></form-contacto>
+      <div class="tablanuevo" id="tablanuevo">
+        <form-contacto id="formcomponent"  salida="{{visible}}" tipo="{{tipo}}"></form-contacto>
       </div>
     </div>
   </template>
@@ -124,12 +127,20 @@
           visible: {
             type: String,
             value: "none"
+          },
+          tipo: {
+            type: String
           }
         };
       }
-       abreModal(){
+       nuevoRegistro(){
             this.visible="flex";
+            this.tipo="new";
         }
+        editaRegistro(){
+             this.visible="flex";
+               this.tipo="edit";
+         }
     }
 
     window.customElements.define(AgendaUsuario.is, AgendaUsuario);
