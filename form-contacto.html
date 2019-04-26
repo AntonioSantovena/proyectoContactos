@@ -2,11 +2,60 @@
 <link rel="import" href="form-contacto.html">
 <dom-module id="form-contacto">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+    <div class="modal" id="modal">
+
+    <div class="tablanuevo">
+
+    <h2 id="titleNuevo">
+      Nuevo Contacto
+    </h2>
+    <h2 id="titleModificar">
+      Editar Contacto
+    </h2
+    dkskd
+    <hr ></hr>
+    <table class="tabla">
+      <tr>
+        <td><label class="etiqueta" >ID</label></td>
+        <td><input class="inputText"  type="text" id="idpersona" disabled>  </td>
+      </tr>
+      <tr>
+        <td><label class="etiqueta" >Nombre</label></td>
+        <td><input class="inputText" onkeyup="validaVacio(1)" type="text" id="nombre">  </td>
+      </tr>
+      <tr>
+        <td><label class="etiqueta" >Edad</label></td>
+        <td><input class="inputText" onkeyup="validaVacio(2)" onKeyPress="return soloNumeros(event)" type="text" id="edad"></td>
+      </tr>
+      <tr>
+        <td><label class="etiqueta">Correo</label></td>
+        <td><input class="inputText" onkeyup="validaVacio(3)" type="text" id="correo"></td>
+      </tr>
+      <tr>
+        <td><label class="etiqueta">Telefono</label></td>
+        <td><input class="inputText" onkeyup="validaVacio(4)" onKeyPress="return soloNumeros(event)" type="text" id="telefono" ></td>
+      </tr>
+    </table>
+
+  <div class="msgError oculto" id="errorDiv">
+  </div>
+
+  <div class="botonera">
+  <button class="buton" id="botonNew" onclick="agregar()">Agregar</button>
+    <button class="buton" id="botonUpdate" onclick="guardaCambios()">Guardar</button>
+    <button class="buton" onclick="salir()">Salir</button>
+  </div>
+  </div>
+  </div>
+
+  <div class="modal-borrar" id="modal-borrar">
+    <div class="contentElimina">
+      <label class="oculto" id="idEliminar"></label>
+      <label class="etiqueta">Desea Eliminar a <spam id="personaEliminar" ></spam> de la lista</label>
+      <button class="buton" onclick="borrarContacto()">Borrar</button>
+      <button class="buton" onclick="salir()">Salir</button>
+    </div>
+  </div>
     <h2>Hello  [[prop1]]</h2>
   </template>
 <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
