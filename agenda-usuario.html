@@ -5,6 +5,34 @@
 <dom-module id="agenda-usuario">
   <template>
     <style>
+      .modal{
+      z-index:3;
+      padding-top:100px;
+      position:fixed;
+      justify-content: center;
+       align-items: flex-start;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      overflow:auto;
+      background-color:rgb(0,0,0);
+      background-color:rgba(0,0,0,0.4)
+      }
+      .tablanuevo{
+      margin: 0;
+       padding: 30px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       position: relative;
+       width: 30%;
+       border: 1px solid black;
+       border-radius: 4px;
+       background-color: #FFFFFF;
+
+    }
       .template{
         display: flex;
         display: grid;
@@ -63,11 +91,16 @@
     <!---->
     </div>
     <div class="nuevoContacto">
-      <button class="botones" type="button" name="button">Nuevo contacto</button>
+      <button class="botones" type="button" name="button" on-click="abreModal">Nuevo contacto</button>
     </div>
     <div class="section2">
     <list-contactos></list-contactos>
     </div>
+    </div>
+    <div class="modal" id="modal" style="display: {{visible}}">
+      <div class="tablanuevo">
+        <form-contacto></form-contacto>
+      </div>
     </div>
   </template>
 
@@ -87,9 +120,16 @@
           prop1: {
             type: String,
             value: 'agenda-usuario'
+          },
+          visible: {
+            type: String,
+            value: "none"
           }
         };
       }
+       abreModal(){
+            this.visible="flex";
+        }
     }
 
     window.customElements.define(AgendaUsuario.is, AgendaUsuario);

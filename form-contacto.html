@@ -1,40 +1,56 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="form-contacto.html">
+<link rel = "import" href = "bower_components/paper-input/paper-input.html">
+
 <dom-module id="form-contacto">
   <template>
-    <div class="modal" id="modal">
-
-    <div class="tablanuevo">
-
-    <h2 id="titleNuevo">
+    <style media="screen">
+    .buton{
+       width: 100px;
+        background: #469bea;
+        width: 100px;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        justify-content: center;
+        text-align: center;
+      }.tabla{
+        width: 100%;
+      }
+    </style>
+    <h3 id="titleNuevo">
       Nuevo Contacto
-    </h2>
-    <h2 id="titleModificar">
+    </h3>
+  <!--  <h2 id="titleModificar">
       Editar Contacto  djsdj
-    </h2
-    dkskd
-    <hr ></hr>
+    </h2>-->
+
+
     <table class="tabla">
-      <tr>
-        <td><label class="etiqueta" >ID</label></td>
-        <td><input class="inputText"  type="text" id="idpersona" disabled>  </td>
-      </tr>
-      <tr>
-        <td><label class="etiqueta" >Antonio</label></td>
-        <td><input class="inputText" onkeyup="validaVacio(1)" type="text" id="nombre">  </td>
-      </tr>
-      <tr>
-        <td><label class="etiqueta" >Edad</label></td>
-        <td><input class="inputText" onkeyup="validaVacio(2)" onKeyPress="return soloNumeros(event)" type="text" id="edad"></td>
-      </tr>
-      <tr>
-        <td><label class="etiqueta">Correo</label></td>
-        <td><input class="inputText" onkeyup="validaVacio(3)" type="text" id="correo"></td>
-      </tr>
-      <tr>
-        <td><label class="etiqueta">Telefono</label></td>
-        <td><input class="inputText" onkeyup="validaVacio(4)" onKeyPress="return soloNumeros(event)" type="text" id="telefono" ></td>
-      </tr>
+  <!----    <tr>
+        <td class="input-form"><h3 style="text-align: center"  >Registro</h3> <hr></td>
+      </tr>-->
+  <tr>
+    <td class="input-form"><paper-input  id="ap" on-value-changed="validaAp" label="Apellido Paterno" required error-message="Ingrese el Apellido Parterno" value="{{apMaterno}}"></paper-input> </td>
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  id="am" on-value-changed="validaAm" label="Apellido Materno" required error-message="Ingrese el Apellido Materno" value="{{apPaterno}}"></paper-input> </td>
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  id ="name" on-value-changed="validaName" label="Nombre" required error-message="Ingrese el Nombre" value="{{nombre}}"></paper-input></td>
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  id ="email" on-change="validaMail" label="Correo" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required error-message="Ingrese un correo valido" value="{{correo}}"></paper-input></td>
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  label="Nombre completo" readonly value="{{nombreCompleto}}"></paper-input></td>
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  label="IS" readonly value="{{nameis}}"></paper-input></td>
+  </tr>
     </table>
 
   <div class="msgError oculto" id="errorDiv">
@@ -45,9 +61,8 @@
     <button class="buton" id="botonUpdate" onclick="guardaCambios()">Guardar</button>
     <button class="buton" onclick="salir()">Salir</button>
   </div>
-  </div>
-  </div>
 
+<!--
   <div class="modal-borrar" id="modal-borrar">
     <div class="contentElimina">
       <label class="oculto" id="idEliminar"></label>
@@ -55,22 +70,13 @@
       <button class="buton" onclick="borrarContacto()">Borrar</button>
       <button class="buton" onclick="salir()">Salir</button>
     </div>
-  </div>
-    <h2>Hello  [[prop1]]</h2>
+  </div>-->
   </template>
 <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
   <script>
 
       // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAIaYbSp2stEDUR1XQdn-OcO0vRQDi_wxk",
-        authDomain: "my-project-1511800376281.firebaseapp.com",
-        databaseURL: "https://my-project-1511800376281.firebaseio.com",
-        projectId: "my-project-1511800376281",
-        storageBucket: "my-project-1511800376281.appspot.com",
-        messagingSenderId: "549060527811"
-      };
-      firebase.initializeApp(config);
+
     class FormContacto extends Polymer.Element {
       static get is() { return 'form-contacto'; }
       static get properties() {
@@ -80,6 +86,23 @@
             value: 'form-contacto'
           }
         };
+      }
+      ready(){
+    /**    super.ready();
+        var config = {
+          apiKey: "AIzaSyAIaYbSp2stEDUR1XQdn-OcO0vRQDi_wxk",
+          authDomain: "my-project-1511800376281.firebaseapp.com",
+          databaseURL: "https://my-project-1511800376281.firebaseio.com",
+          projectId: "my-project-1511800376281",
+          storageBucket: "my-project-1511800376281.appspot.com",
+          messagingSenderId: "549060527811"
+        };
+        firebase.initializeApp(config);
+        var db = firebase.database();
+var ref = db.ref("data~2Fcontactos");
+ref.once("value", function(snapshot) {
+  console.log(snapshot.val());
+});**/
       }
     }
 
