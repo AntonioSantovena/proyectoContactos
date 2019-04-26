@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="list-contactos">
   <template>
@@ -7,6 +8,12 @@
         display: block;
       }
     </style>
+    <iron-ajax
+      auto
+      url="../json/contactos.json"
+      handle-as="json"
+      last-response = "{{data}}">
+    </iron-ajax>
     <h1>Lista de contactos</h1>
 
     <table border="4px">
@@ -14,13 +21,10 @@
       <th>Imagen</th>
       <tbody>
         <tr>
-          <td>Antonio</td>
-          <td>Imagen</td>
+          <td>{{data.Nombre}}</td>
+          <td>{{data.Telefono}}</td>
         </tr>
-        <tr>
-          <td>Lui</td>
-          <td>Imagen</td>
-        </tr>
+
       </tbody>
     </table>
   </template>
