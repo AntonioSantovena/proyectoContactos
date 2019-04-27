@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel = "import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase-query.html">
 
 <dom-module id="list-contactos">
   <template>
@@ -14,19 +17,34 @@
       handle-as="json"
       last-response = "{{data}}">
     </iron-ajax>
+
+    <firebase-app
+    proyect-id = "prfinal-d4e0d"
+     api-key= "AIzaSyCvpbll8xQNis64mzRSP9wpcUQESECIwN8"
+     auth-domain= "prfinal-d4e0d.firebaseapp.com"
+     database-url= "https://prfinal-d4e0d.firebaseio.com"
+     storage-bucket= "prfinal-d4e0d.appspot.com"
+     messaging-sender-id= "801620956968">
+    </firebase-app>
+
+    <firebase-query
+    id="basepersonas"
+    path="personas"
+    data="{{imprime}}"
+    ></firebase-query>
+
+
     <h1>Lista de contactos</h1>
 
-    <table border="4px">
-      <th>Datos</th>
-      <th>Imagen</th>
-      <tbody>
-        <tr>
-          <td>{{data.Nombre}}</td>
-          <td>{{data.Telefono}}</td>
-        </tr>
+    <template is="dom-repeat" items="{{imprime}}" as="personas">
+      <table border="5px">
+          <tr>
+            <td>[[personas.nombre]]</td>
+            <td>[[personas.telefono]]</td>
+          </tr>
+      </table>
+    </template>
 
-      </tbody>
-    </table>
   </template>
 
 
