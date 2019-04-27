@@ -7,9 +7,28 @@
 <dom-module id="list-contactos">
   <template>
     <style>
-      :host {
-        display: block;
-      }
+      #contactos {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#contactos td, #contactos th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#contactos tr:nth-child(even){background-color: #f2f2f2;}
+
+#contactos tr:hover {background-color: #ddd;}
+
+#contactos th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
     </style>
     <iron-ajax
       auto
@@ -37,7 +56,9 @@
     <h1>Lista de contactos</h1>
 
     <template is="dom-repeat" items="{{imprime}}" as="personas">
-      <table border="5px">
+      <table width="50%" border="5px" id="contactos">
+        <th>Nombre</th>
+        <th>Telefono</th>
           <tr>
             <td>[[personas.nombre]]</td>
             <td>[[personas.telefono]]</td>
