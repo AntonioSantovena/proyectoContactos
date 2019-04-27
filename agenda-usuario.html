@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/style.css"/>
 <link rel="import" href="../list-contactos.html">
 <link rel="import" href="../form-contacto.html">
+<link rel="import" href="../component-edit.html">
 <dom-module id="agenda-usuario">
   <template>
     <style>
@@ -37,7 +38,7 @@
       .template{
         display: flex;
         display: grid;
-        grid-template-columns: repeat(4, 25%);
+        grid-template-columns: (3%, 70%, 27%);
         grid-template-rows: 9;
         background-image: url("imagenFondo.jpg");
 
@@ -47,14 +48,14 @@
       .section1{
         display: flex;
         grid-column: 2;
-        grid-row: 1;
+        grid-row: 2;
         justify-content: center;
         margin-top: 23px;
 
       }
       .nuevoContacto{
         display: flex;
-        grid-column: 4;
+        grid-column: 3;
         grid-row: 1;
         justify-content: center;
         margin-top: 23px;
@@ -64,8 +65,8 @@
 
       .section2{
         display: flex;
-        grid-column: 4;
-        grid-row: 3;
+        grid-column: 3;
+        grid-row: 2;
         justify-content: center;
         margin-top: 23px;
         margin-bottom: 23px;
@@ -89,6 +90,7 @@
     <div class="template">
     <div class="section1">
     <h2>Componente de Imagen</h2>
+    <component-edit></component-edit>
     <!---->
     </div>
     <div class="nuevoContacto">
