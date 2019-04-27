@@ -34,29 +34,25 @@
         <td class="input-form"><h3 style="text-align: center"  >Registro</h3> <hr></td>
       </tr>-->
   <tr>
-    <td class="input-form"><paper-input  id="ap" on-value-changed="validaAp" label="Apellido Paterno" required error-message="Ingrese el Apellido Parterno" value="{{apMaterno}}"></paper-input> </td>
-  </tr>
-  <tr>
-    <td class="input-form"><paper-input  id="am" on-value-changed="validaAm" label="Apellido Materno" required error-message="Ingrese el Apellido Materno" value="{{apPaterno}}"></paper-input> </td>
-  </tr>
-  <tr>
-    <td class="input-form"><paper-input  id ="name" on-value-changed="validaName" label="Nombre" required error-message="Ingrese el Nombre" value="{{nombre}}"></paper-input></td>
+
+      <td class="input-form"><paper-input  id ="name" on-value-changed="validaName" label="Nombre" required error-message="Ingrese el Nombre" value="{{nombre}}"></paper-input></td>
+      <td class="input-form"><paper-input  id="am" on-value-changed="validaAm" label="Apellido Materno" required error-message="Ingrese el Apellido Materno" value="{{apPaterno}}"></paper-input> </td>
+
+    <td class="input-form">  <paper-input  id="ap" on-value-changed="validaAp" label="Apellido Paterno" required error-message="Ingrese el Apellido Parterno" value="{{apMaterno}}"></paper-input>
+     </td>
+
   </tr>
   <tr>
     <td class="input-form"><paper-input  id ="email" on-change="validaMail" label="Correo" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required error-message="Ingrese un correo valido" value="{{correo}}"></paper-input></td>
-  </tr>
-  <tr>
-    <td class="input-form"><paper-input  label="Nombre completo" readonly value="{{nombreCompleto}}"></paper-input></td>
-  </tr>
-  <tr>
-    <td class="input-form"><paper-input  label="IS" readonly value="{{nameis}}"></paper-input></td>
+    <td class="input-form"><paper-input  label="Telefono"  value="{{nameis}}"></paper-input></td>
+
   </tr>
     </table>
 
   <div class="msgError oculto" id="errorDiv">
   </div>
 
-  <div class="botonera">
+  <div class="botonera" style="text-align: center;">
   <button class="buton" id="botonNew" onclick="agregar()">Agregar</button>
     <button class="buton" id="botonUpdate" onclick="guardaCambios()">Guardar</button>
     <button class="buton" on-click="salir">Salir</button>
