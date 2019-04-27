@@ -7,28 +7,21 @@
 <dom-module id="component-edit">
   <template>
     <style>
+      .imageStyle{
+        width:50px;
+
+      }
     </style>
-    <h1>Mis Contactos</h1>
-    <div>
-      <mp-slider controls bullets show-thumbs>
-          <div>
-              <img src="../img/Joana_12.jpg" />
-              <mp-caption slider-header="Joana"
-                          slider-content="Sister">
-              </mp-caption>
-          </div>
 
-          <div>
-              <img src="../img/Juan_1.png" />
-              <mp-caption slider-header="Juan" slider-content="BoyFriend"></mp-caption>
-          </div>
+    <iron-ajax
+      id="getImageContact"
+      url="../image.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="responseGenerate"
+      >
+    </iron-ajax>
 
-          <div>
-              <img src="../img/Daniel_11.png" />
-              <mp-caption slider-header="Daniel" slider-content="I hate you"></mp-caption>
-          </div>
-      </mp-slider>
-    </div>
   </template>
 
   <script>
@@ -36,11 +29,42 @@
       static get is() { return 'component-edit'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'component-edit'
+          data: {
+            type: Object,
+            value: {
+             "id": "","name":"", "urlImage":""
+            }
           }
         };
+      }
+      constructor(){
+        super();
+        const shadowRoot = this.attachShadow({mode: 'open'});
+
+      }
+      ready() {
+        super.ready();
+        this.$.getImageContact.generateRequest();
+      }
+
+      responseGenerate(request){
+        let mpSlider = '';
+        var div = document.createElement('div');
+        div.id = "container";
+        div.style.width = "70%";
+        this.set('data', this.$.getImageContact.lastResponse[0]);
+        this.data  = JSON.parse(JSON.stringify(request.detail.response)) ;
+        for(let i = 0; i < this.data.length; i++){
+            mpSlider += `
+              <div><img class="imageStyle" src="${this.data[i].urlImage}"/>
+                <mp-caption style="text-align:center" slider-header="${this.data[i].name}">
+                </mp-caption>
+              </div>`
+        }
+        div.innerHTML= `
+           <mp-slider controls bullets show-thumbs>${mpSlider}</mp-slider>
+          `;
+        this.shadowRoot.appendChild(div);
       }
     }
 
