@@ -1,9 +1,12 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel = "import" href = "bower_components/paper-input/paper-input.html">
+<link rel = "import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase-query.html">
 
 <dom-module id="form-contacto">
   <template>
-  
+
     <style media="screen">
     .buton{
        width: 100px;
@@ -19,7 +22,7 @@
         justify-content: center;
         text-align: center;
       }.tabla{
-        
+
         width: 100%;
       }
     </style>
@@ -36,17 +39,22 @@
         <td class="input-form"><h3 style="text-align: center"  >Registro</h3> <hr></td>
       </tr>-->
   <tr>
-
       <td class="input-form"><paper-input  id ="name" on-value-changed="validaName" label="Nombre" required error-message="Ingrese el Nombre" value="{{nombre}}"></paper-input></td>
-      <td class="input-form"><paper-input  id="am" on-value-changed="validaAm" label="Apellido Materno" required error-message="Ingrese el Apellido Materno" value="{{apPaterno}}"></paper-input> </td>
-
-    <td class="input-form">  <paper-input  id="ap" on-value-changed="validaAp" label="Apellido Paterno" required error-message="Ingrese el Apellido Parterno" value="{{apMaterno}}"></paper-input>
+      <td class="input-form"><paper-input  id="am" on-value-changed="validaAm" label="Apellido Materno" required error-message="Ingrese el Apellido Materno" value="{{appaterno}}"></paper-input> </td>
+    <td class="input-form">  <paper-input  id="ap" on-value-changed="validaAp" label="Apellido Paterno" required error-message="Ingrese el Apellido Parterno" value="{{apmaterno}}"></paper-input>
      </td>
 
   </tr>
   <tr>
-    <td class="input-form"><paper-input  id ="email" on-change="validaMail" label="Correo" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required error-message="Ingrese un correo valido" value="{{correo}}"></paper-input></td>
-    <td class="input-form"><paper-input  label="Telefono"  value="{{nameis}}"></paper-input></td>
+    <td class="input-form" colspan="2"><paper-input  id ="email" on-change="validaMail" label="Correo" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required error-message="Ingrese un correo valido" value="{{correo}}"></paper-input></td>
+    <td class="input-form"><paper-input  label="Telefono"  value="{{tel}}"></paper-input></td>
+    <!--td class="input-form"><paper-input  label="Imagen"  value="{{imagen}}"></paper-input></td-->
+  </tr>
+  <tr>
+    <td class="input-form"><paper-input  id ="calle-input"  label="Calle"  value="{{calle}}"></paper-input></td>
+    <td class="input-form"><paper-input  id="numeroint"  label="Numero interior"  value="{{noint}}"></paper-input> </td>
+    <td class="input-form"><paper-input  id="numeroext"  label="Numero exterior"  value="{{noext}}"></paper-input>
+  </td>
 
   </tr>
     </table>
@@ -55,11 +63,26 @@
   </div>
 
   <div class="botonera" style="text-align: center;">
-  <button class="buton" id="botonNew" onclick="agregar()">Agregar</button>
-    <button class="buton" id="botonUpdate" onclick="guardaCambios()">Guardar</button>
+  <button class="buton" id="botonNew" on-click="agregar">Agregar</button>
+    <button class="buton" id="botonUpdate" on-click="modifica">Guardar</button>
     <button class="buton" on-click="salir">Salir</button>
   </div>
+  <firebase-app
+   proyect-id = "prfinal-d4e0d"
+   api-key= "AIzaSyCvpbll8xQNis64mzRSP9wpcUQESECIwN8"
+   auth-domain= "prfinal-d4e0d.firebaseapp.com"
+   database-url= "https://prfinal-d4e0d.firebaseio.com"
+   storage-bucket= "prfinal-d4e0d.appspot.com"
+   messaging-sender-id= "801620956968"
+   name="formulario">
+  </firebase-app>
 
+  <firebase-query
+  app-name="formulario"
+  id="formulario"
+  path="personas"
+  data="{{imprime}}"
+  ></firebase-query>
 <!--
   <div class="modal-borrar" id="modal-borrar">
     <div class="contentElimina">
@@ -90,6 +113,46 @@
           tipo: {
             type: String,
             observer: "validaTipo"
+          },
+          nombre: {
+            type: String,
+            value:""
+          },
+          appaterno: {
+            type: String,
+            value:""
+          },
+          apmaterno: {
+            type: String,
+            value:""
+          },
+          calle: {
+            type: String,
+            value:""
+          },
+          noint: {
+            type: String,
+            value:""
+          },
+          noext: {
+            type: String,
+            value:""
+          },
+          tel: {
+            type: String,
+            value:""
+          },
+          correo: {
+            type: String,
+            value:""
+          },
+          imagen: {
+            type: String,
+            value:""
+          },
+          idcontacto: {
+            type: String,
+            value:"-LdV4tHrzBAGnQyJhF5s"
           }
         };
       }
@@ -105,16 +168,70 @@
           this.$.titleModificar.style.display = "none";
           this.$.botonNew.style.display = "inline-flex";
           this.$.botonUpdate.style.display = "none";
+          this.nombre="";
+          this.appaterno="";
+          this.apmaterno="";
+          this.calle="";
+          this.noint="";
+          this.noext="";
+          this.correo="";
+          this.tel="";
+          this.imagen="";
         }else if(valor=='edit'){
           console.log("editaContacto");
           this.$.titleNuevo.style.display = "none";
           this.$.titleModificar.style.display = "flex";
           this.$.botonNew.style.display = "none";
           this.$.botonUpdate.style.display = "inline-flex";
+
+          var contactoObtenido=JSON.stringify(this.imprime);
+          var contactoObtenido=this.imprime;
+          const infoContacto = contactoObtenido.filter(dato => dato.$key == this.idcontacto);
+                this.nombre=infoContacto['0'].nombre;
+                this.appaterno=infoContacto['0'].apaterno;
+                this.apmaterno=infoContacto['0'].amaterno;
+                this.calle=infoContacto['0'].calle;
+                this.noint=infoContacto['0'].nointerior;
+                this.noext=infoContacto['0'].noexterior;
+                this.correo=infoContacto['0'].correo;
+                this.tel=infoContacto['0'].telefono;
+                this.imagen=infoContacto['0'].imagen;
         }
+
       }
       salir(){
         this.salida = 'none';
+      }
+      agregar(){
+        var nuevocontacto = {
+                 nombre: this.nombre,
+                 apaterno: this.appaterno,
+                 amaterno: this.apmaterno,
+                 calle: this.calle,
+                 nointerior: this.noint,
+                 noexterior: this.noext,
+                 telefono: this.tel,
+                 correo: this.correo,
+                 imagen: this.imagen
+           }
+        this.$.formulario.ref.push(nuevocontacto);
+        console.log("ya se mando");
+      }
+      modifica(){
+        this.$.formulario.ref.child(this.idcontacto).set({
+
+          nombre: this.nombre,
+          apaterno: this.appaterno,
+          amarterno: this.apmaterno,
+          calle: this.calle,
+          nointerior: this.noint,
+          noexterior: this.noext,
+          telefono: this.tel,
+          correo: this.correo,
+          imagen: this.imagen
+
+        });
+        console.log("ACTUALIZADO");
       }
     }
 
