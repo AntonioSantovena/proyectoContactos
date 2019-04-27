@@ -1,0 +1,20 @@
+{
+  "personas" : {
+    "persona1" : {
+      "amaterno" : "benavidez",
+      "apaterno" : "perez",
+      "calle" : "estaño",
+      "correo" : "juan.perezb@softtek.com",
+      "imagen" : "../img/persona1",
+      "noexterior" : 144,
+      "nointerior" : 9,
+      "nombre" : "juan carlos",
+      "telefono" : 123456789
+    },
+    "persona2" : {
+      "apellidos" : "de la cruzito",
+      "nombre" : "esteban",
+      "telefono" : 9999999999
+    }
+  }
+}
