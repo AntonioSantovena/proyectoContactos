@@ -6,8 +6,8 @@
     "paper-listbox": "PolymerElements/paper-listbox#2.1.1",
     "paper-item": "PolymerElements/paper-item#2.1.1",
     "mp-slider": "mpachnis/mp-slider#2.0.5",
-    "paper-input": "PolymerElements/paper-input#2.2.3",
-    "iron-ajax": "PolymerElements/iron-ajax#2.1.3",
+    "paper-input": "@polymer/paper-input#2.2.3",
+    "iron-ajax": "@polymer/iron-ajax#2.1.3",
     "polymerfire": "^2.2.1"
   },
   "devDependencies": {
