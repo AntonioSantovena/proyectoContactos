@@ -102,7 +102,7 @@
     </firebase-app>
 
     <firebase-query
-    id="query"
+    id="basepersonas"
     path="personas"
     data="{{imprime}}"
     ></firebase-query>
@@ -121,6 +121,9 @@
     <div class="nuevoContacto">
       <button class="botones" type="button" name="button" on-click="nuevoRegistro">Nuevo contacto</button>
       <button class="botones" type="button" name="button" on-click="editaRegistro">Edita contacto</button>
+
+      <button class="botones" type="button" name="button" on-click="mandar">MANDAR A FIREBASE</button>
+
 
     </div>
     <div class="section2">
@@ -167,6 +170,16 @@
         editaRegistro(){
              this.visible="flex";
                this.tipo="edit";
+         }
+
+         mandar(){
+           var nuevocontacto = {
+                      id: "2",
+                    nombre: 'Alejandro Martinrz',
+                    correo: 'antonio@desarrolloweb.com'
+                              }
+           this.$.basepersonas.ref.push(nuevocontacto);
+           console.log("ya se mando");
          }
     }
 
