@@ -1,0 +1,82 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../agenda-usuario.html"/>
+
+
+
+<dom-module id="login-element">
+  <template>
+    <style>
+      .template{
+        display: flex;
+        display: grid;
+        grid-template-columns: 3;
+        grid-template-rows: 3;
+        background-image: url("body.jpg");
+        color: white;
+
+      }
+      .section1{
+        display: flex;
+        grid-column: 2;
+        grid-row: 2;
+
+      }
+
+      .botones{
+
+        text-decoration: none;
+          padding: 10px;
+          font-weight: 600;
+          font-size: 20px;
+          color: #ffffff;
+          background-color: #1883ba;
+          border-radius: 6px;
+          border: 2px solid #0016b0;
+      }
+
+
+    </style>
+
+    <div class="template">
+    <div class="">
+    <h1>Estás en Login-component</h1>
+    <input type="text" name="" placeholder="Ingresa tu usuario">
+    <input type="text" name="" placeholder="Ingresa tu contraseña">
+    <button class="botones" type="button" name="button" on-click="iniciar">Iniciar sesión</button>
+    </div>
+    </div>
+
+
+
+  </template>
+
+
+
+  <script>
+    /**
+     * `agenda-usuario`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class LoginElement extends Polymer.Element {
+      static get is() { return 'login-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'login-element'
+          }
+        };
+      }
+      iniciar(){
+        document.body.innerHTML = `<agenda-usuario></agenda-usuario>`;
+      }
+    }
+
+    window.customElements.define(LoginElement.is, LoginElement);
+  </script>
+</dom-module>
