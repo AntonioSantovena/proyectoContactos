@@ -29,6 +29,13 @@
   background-color: #4CAF50;
   color: white;
 }
+
+#divTable{
+overflow:scroll;
+     height:500px;
+     width:450px;
+}
+
     </style>
     <iron-ajax
       auto
@@ -55,16 +62,18 @@
 
     <h1>Lista de contactos</h1>
 
+    <div id="divTable">
     <template is="dom-repeat" items="{{imprime}}" as="personas">
       <table width="50%" border="5px" id="contactos">
         <th>NombresS</th>
         <th>Telefono</th>
           <tr>
-            <td>[[personas.nombre]]</td>
-            <td>[[personas.telefono]]</td>
+            <td width="25%">[[personas.nombre]]</td>
+            <td width="25%">[[personas.telefono]]</td>
           </tr>
       </table>
     </template>
+    </div>
 
   </template>
 
