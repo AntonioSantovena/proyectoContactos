@@ -1,8 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/firebase.html">
+
 <link rel="stylesheet" href="/style.css"/>
 <link rel="import" href="../list-contactos.html">
 <link rel="import" href="../form-contacto.html">
 <link rel="import" href="../component-edit.html">
+
 <dom-module id="agenda-usuario">
   <template>
     <style>
@@ -29,7 +32,7 @@
        align-items: center;
        flex-direction: column;
        position: relative;
-       width: 30%;
+       width: 40%;
        border: 1px solid black;
        border-radius: 4px;
        background-color: #FFFFFF;
@@ -38,7 +41,7 @@
       .template{
         display: flex;
         display: grid;
-        grid-template-columns: (3%, 70%, 27%);
+        grid-template-columns: repeat(4, 25%);
         grid-template-rows: 9;
         background-image: url("imagenFondo.jpg");
 
@@ -48,14 +51,14 @@
       .section1{
         display: flex;
         grid-column: 2;
-        grid-row: 2;
+        grid-row: 1;
         justify-content: center;
         margin-top: 23px;
 
       }
       .nuevoContacto{
         display: flex;
-        grid-column: 3;
+        grid-column: 4;
         grid-row: 1;
         justify-content: center;
         margin-top: 23px;
@@ -65,8 +68,8 @@
 
       .section2{
         display: flex;
-        grid-column: 3;
-        grid-row: 2;
+        grid-column: 4;
+        grid-row: 3;
         justify-content: center;
         margin-top: 23px;
         margin-bottom: 23px;
@@ -98,7 +101,27 @@
       <button class="botones" type="button" name="button" on-click="editaRegistro">Edita contacto</button>
 
     </div>
+   <firebase-app
+    api-key = "AIzaSyDl9jJVWQM5_gsGD-m3ili6JC2FLGwTmR0"
+    auth-domain = "agendacontactosscrum.firebaseapp.com"
+    database-url= "https://agendacontactosscrum.firebaseio.com"
+    storage-bucket= "agendacontactosscrum.appspot.com"
+    messaging-sender-id= "agendacontactosscrum"
+    name = "660991393912" >
+</firebase-app>
+<firebase-query
+    id="query"
+    app-name="agendacontactosscrum"
+    path="/contactos"
+    data="{{datos}}" >
+</firebase-query>
+
     <div class="section2">
+      <template is="dom-repeat" items="{{datos}}" as="contacto">
+    <p>
+      Nombre: [[contacto.nombre]], email: [[contacto.telefono]]
+    </p>
+  </template>
     <list-contactos></list-contactos>
     </div>
     </div>
@@ -108,7 +131,7 @@
       </div>
     </div>
   </template>
-
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
   <script>
     /**
      * `agenda-usuario`
@@ -132,8 +155,16 @@
           },
           tipo: {
             type: String
+          },
+          datos: {
+            type: Object,
+            observer: 'ver'
           }
         };
+      }
+      ver(){
+        this.datos
+        console.log("hola");
       }
        nuevoRegistro(){
             this.visible="flex";

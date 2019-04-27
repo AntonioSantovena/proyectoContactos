@@ -4,7 +4,10 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#2.1.1",
-    "paper-item": "PolymerElements/paper-item#2.1.1"
+    "paper-item": "PolymerElements/paper-item#2.1.1",
+    "paper-input": "PolymerElements/paper-input#2.1.1",
+    "polymerfire": "^2.2.1",
+    "mp-slider": "mpachnis/mp-slider#2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
