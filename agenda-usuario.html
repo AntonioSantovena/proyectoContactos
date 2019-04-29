@@ -45,7 +45,11 @@
      display: grid;
      grid-template-columns: (3%, 70%, 27%);
      grid-template-rows: 9;
-     background-image: url("imagenFondo.jpg");
+
+     width: 100%;
+     weight: 100%;
+     overflow: auto;
+     position: fixed;
 
    }
 
@@ -124,23 +128,15 @@
     data="{{imprime}}"
     ></firebase-query>
 
-
-    <template is="dom-repeat" items="{{imprime}}" as="item">
-    personas:  [[item.telefono]]  [[item.nombre]]
-    </template>
-
-    <div class="template">
+    <div>
     <div class="section1">
-    <h2>Componente de Imagen</h2>
+
     <component-edit></component-edit>
     <!---->
     </div>
     <div class="nuevoContacto">
       <button class="botones" type="button" name="button" on-click="nuevoRegistro">Nuevo contacto</button>
       <button class="botones" type="button" name="button" on-click="editaRegistro">Edita contacto</button>
-
-      <button class="botones" type="button" name="button" on-click="mandar">MANDAR A FIREBASE</button>
-
 
     </div>
    <firebase-app
@@ -215,16 +211,6 @@
         editaRegistro(){
              this.visible="flex";
                this.tipo="edit";
-         }
-
-         mandar(){
-           var nuevocontacto = {
-                      id: "2",
-                    nombre: 'Alejandro Martinrz',
-                    correo: 'antonio@desarrolloweb.com'
-                              }
-           this.$.contactos.ref.push(nuevocontacto);
-           console.log("ya se mando");
          }
     }
 
