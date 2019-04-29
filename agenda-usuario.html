@@ -45,7 +45,11 @@
      display: grid;
      grid-template-columns: (3%, 70%, 27%);
      grid-template-rows: 9;
-     background-image: url("imagenFondo.jpg");
+
+     width: 100%;
+     weight: 100%;
+     overflow: auto;
+     position: fixed;
 
    }
 
@@ -124,7 +128,7 @@
     data="{{imprime}}"
     ></firebase-query>
 
-    <div class="template">
+    <div>
     <div class="section1">
 
     <component-edit></component-edit>
