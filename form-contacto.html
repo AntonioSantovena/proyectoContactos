@@ -10,6 +10,9 @@
   <template>
 
     <style media="screen">
+      image-input{
+        height:10px;
+      }
     .buton{
        width: 100px;
         background: #469bea;
@@ -35,13 +38,13 @@
       Editar Contacto
     </h2>
 
-    <image-input id="ii2" url="{{imageUrl}}" placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAG1BMVEUAAAD///9/f38/Pz8fHx9fX1+/v7+fn5/f39+rr0+4AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABWUlEQVRoge2TT2+CMBiHX6GoR5L5AYhu6pGEiNduYQlHIod5NNvsdjRmsqvb9Huv4CYVyp9l199zIPBr+7xt30AEAAAAAAAAAACAdhhO/fh4nU6pmdUg6L2xBkEDnVZlaggbBSZn7iJiQ5doNhkR3W3diMzJtSIweSrIs0sMxxjHWz9+JGsdLyPr6L0fKImXbjaafIjfSzxnZcEV9Z9PezVXfVltYGyI7fMdZAIlKwk21HVIrpTYvnwM0vengkDJSgKHehF1ObHZ0J6nlvTqdxQEXBGcsnrBeOTZISdrdSuE+DSFPH4uyLJ6gTwK2cbRm/IwHz4LQt3iS4E8JbP797KhHY2g00pg2Nldys+SQMmqBD2HHvbmq9gR+yLiBYGSVQmYSJw9EZuvyH9JNgWBklXCfirIdgeaYrpMj7bdf4Ad/rPav/Gm2n+mdfnFtqpfAAAAAAAAANCKb8w3PQYNl7XnAAAAAElFTkSuQmCC">
+    <!--image-input id="ii2" url="{{imageUrl}}" placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAG1BMVEUAAAD///9/f38/Pz8fHx9fX1+/v7+fn5/f39+rr0+4AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABWUlEQVRoge2TT2+CMBiHX6GoR5L5AYhu6pGEiNduYQlHIod5NNvsdjRmsqvb9Huv4CYVyp9l199zIPBr+7xt30AEAAAAAAAAAACAdhhO/fh4nU6pmdUg6L2xBkEDnVZlaggbBSZn7iJiQ5doNhkR3W3diMzJtSIweSrIs0sMxxjHWz9+JGsdLyPr6L0fKImXbjaafIjfSzxnZcEV9Z9PezVXfVltYGyI7fMdZAIlKwk21HVIrpTYvnwM0vengkDJSgKHehF1ObHZ0J6nlvTqdxQEXBGcsnrBeOTZISdrdSuE+DSFPH4uyLJ6gTwK2cbRm/IwHz4LQt3iS4E8JbP797KhHY2g00pg2Nldys+SQMmqBD2HHvbmq9gR+yLiBYGSVQmYSJw9EZuvyH9JNgWBklXCfirIdgeaYrpMj7bdf4Ad/rPav/Gm2n+mdfnFtqpfAAAAAAAAANCKb8w3PQYNl7XnAAAAAElFTkSuQmCC">
       </image-input>
       {{imageUrl}}
 
     <div id="output">
       image url:
-    </div>
+    </div-->
 
     <table class="tabla">
   <!----    <tr>
@@ -219,6 +222,14 @@
         this.salida = 'none';
       }
       agregar(){
+       this.$.ii2.url;
+        //let photo = document.getElementById("image-file").files[0];  // file from input
+        /*let req = new XMLHttpRequest();
+        let formData = new FormData();
+
+        formData.append("photo", this.$.ii2.url;);
+        req.open("POST", '/upload/image');
+        req.send(formData);*/
         if(this.$.name.validate() && this.$.ap.validate() && this.$.am.validate() && this.$.telin.validate() && this.$.email.validate()){
           var nuevocontacto = {
                    nombre: this.nombre,
@@ -254,6 +265,14 @@
           });
           this.salida = 'none';
           console.log("ACTUALIZADO");
+
+          //let photo = document.getElementById("image-file").files[0];  // file from input
+          /*let req = new XMLHttpRequest();
+          let formData = new FormData();
+
+          formData.append("photo", this.$.ii2.url;);
+          req.open("POST", '/upload/image');
+          req.send(formData);*/
         }
       }
     }
