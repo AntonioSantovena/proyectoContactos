@@ -30,9 +30,10 @@
   color: white;
 }
 
+
 #divTable{
 overflow:scroll;
-     height:500px;
+     height:200px;
 }
 
     </style>
@@ -62,13 +63,18 @@ overflow:scroll;
     <h1>Lista de contactos</h1>
 
     <div id="divTable">
+      <th>Nombre</th>
+      <th>Teléfono</th>
+      <th>Foto</th>
     <template is="dom-repeat" items="{{imprime}}" as="personas">
-      <table width="50%" border="5px" id="contactos">
-        <th>Nombre</th>
-        <th>Teléfono</th>
+      <table width="90%" border="1" id="contactos">
+        <th class="titulosTabla"></th>
+        <th class="titulosTabla"></th>
+        <th class="titulosTabla"></th>
           <tr>
-            <td width="25%">[[personas.nombre]]</td>
-            <td width="25%">[[personas.telefono]]</td>
+            <td width="30%">[[personas.nombre]]</td>
+            <td width="30%">[[personas.telefono]]</td>
+            <td width="30%"><img src="[[personas.imagen]]" width="50px" height="50px" align="center"/></td>
           </tr>
       </table>
     </template>
