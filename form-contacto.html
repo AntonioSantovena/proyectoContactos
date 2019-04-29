@@ -111,7 +111,6 @@
           },
           tipo: {
             type: String,
-            observer: "validaTipo"
           },
           nombre: {
             type: String,
@@ -151,7 +150,7 @@
           },
           idcontacto: {
             type: String,
-            value:"-LdVfjv7WLSfnApyydbp",
+            value:"nuevo",
             observer: "validaTipo"
           },
           position:{
@@ -159,13 +158,9 @@
           }
         };
       }
-      ready() {
-        super.ready();
-
-      }
       validaTipo(){
-        var valor= this.tipo;
-        if(valor=='new'){
+        var valor= this.idcontacto;
+        if(valor=='nuevo'){
           console.log("nuevoContacto");
           this.$.titleNuevo.style.display = "flex";
           this.$.titleModificar.style.display = "none";
@@ -180,7 +175,7 @@
           this.correo="";
           this.tel="";
           this.imagen="";
-        }else if(valor=='edit'){
+        }else {
           console.log("editaContacto");
           this.$.titleNuevo.style.display = "none";
           this.$.titleModificar.style.display = "flex";

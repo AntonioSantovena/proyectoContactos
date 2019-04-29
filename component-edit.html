@@ -18,18 +18,21 @@
       .imageStyle{
         width:50px;
       }
-      .botones {
-        text-decoration: none;
-        padding: 10px;
-        font-weight: 600;
-        font-size: 20px;
-        color: #ffffff;
-        background-color: #1883ba;
-        border-radius: 6px;
-        border: 2px solid #0016b0;
-        margin-left: 15%;
-        margin-top: 30px;
-      }
+      .botones{
+         justify-content: center;
+          align-items: center;
+              background: #469bea;
+              width: 150px;
+              font-weight: bold;
+              color: white;
+              border: 0 none;
+              border-radius: 1px;
+              cursor: pointer;
+              padding: 10px 5px;
+              margin: 10px 5px;
+              justify-content: center;
+              text-align: center;
+            }
       section {
         display: block;
         text-align: center;
@@ -112,6 +115,7 @@
         font-size: 21px;
         color: white;
       }
+
     </style>
 
     <!--iron-ajax
@@ -155,9 +159,10 @@
         </div>
       </paper-card>
     </section>
+    <br><br>
     <button class="botones" type="button" name="button" on-click="_editContact">Editar Contacto</button>
   </template>
-  
+
   <script>
     class ComponentEdit extends Polymer.Element {
       static get is() { return 'component-edit'; }
