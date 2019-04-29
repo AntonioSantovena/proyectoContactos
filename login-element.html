@@ -43,7 +43,8 @@ backgroun-repeat: no-repeat;
        background-color: #FFFFFF;
 
     }  .buton{
-         width: 100px;
+      justify-content: center;
+      align-items: center;
           background: #469bea;
           width: 100px;
           font-weight: bold;
@@ -51,7 +52,7 @@ backgroun-repeat: no-repeat;
           border: 0 none;
           border-radius: 1px;
           cursor: pointer;
-          padding: 10px 5px;
+          padding: 5% 35%;
           margin: 10px 5px;
           justify-content: center;
           text-align: center;
@@ -157,6 +158,8 @@ backgroun-repeat: no-repeat;
         function (data){
           document.activeElement.__data.appvisible="flex";
           document.activeElement.__data.loginvisible="none";
+          document.activeElement.$.app.style.display="flex";
+          document.activeElement.$.login.style.display="none";
 
         }).catch(function(error) {
           // Handle Errors here.
