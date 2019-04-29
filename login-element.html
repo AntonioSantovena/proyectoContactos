@@ -1,53 +1,98 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../agenda-usuario.html"/>
+<link rel = "import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/login-fire/login-fire-form.html">
+<link rel = "import" href = "bower_components/paper-input/paper-input.html">
+<link rel = "import" href = "bower_components/iron-icon/iron-icon.html">
+
 
 
 
 <dom-module id="login-element">
   <template>
     <style>
-      .template{
-        display: flex;
-        display: grid;
-        grid-template-columns: 3;
-        grid-template-rows: 3;
-        background-image: url("body.jpg");
-        color: white;
-
+      .login{
+      z-index:3;
+      padding-top:50px;
+      position:fixed;
+      justify-content: center;
+       align-items: flex-start;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      overflow:auto;
+background-image: url('contacto-icon.jpg');
+background-size:100% 100%;
+backgroun-repeat: no-repeat;
       }
-      .section1{
-        display: flex;
-        grid-column: 2;
-        grid-row: 2;
+      .tablanuevo{
+      margin: 0;
+       padding: 10px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       position: relative;
+       width: 25%;
+       border: 1px solid black;
+       border-radius: 4px;
+       background-color: #FFFFFF;
 
-      }
+    }  .buton{
+         width: 100px;
+          background: #469bea;
+          width: 100px;
+          font-weight: bold;
+          color: white;
+          border: 0 none;
+          border-radius: 1px;
+          cursor: pointer;
+          padding: 10px 5px;
+          margin: 10px 5px;
+          justify-content: center;
+          text-align: center;
+        }
+        .img{
+          width: 40%;
+        }
+        .app{
 
-      .botones{
+        position:fixed;
+        justify-content: center;
+         align-items: flex-start;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        overflow:auto;
 
-        text-decoration: none;
-          padding: 10px;
-          font-weight: 600;
-          font-size: 20px;
-          color: #ffffff;
-          background-color: #1883ba;
-          border-radius: 6px;
-          border: 2px solid #0016b0;
-      }
+        }
+      </style>
+    <div class="login" id="login" style="display: {{loginvisible}}">
+      <div class="tablanuevo" id="tablanuevo">
+        <h2>BIENVENIDO</h2>{{loginvisible}} {{appvisible}}
+        <img src="../img/contacto-login.png" class="img" />
+        <br>    <br>
+          <paper-input  id ="us" label="Usuario" required error-message="Ingrese el usuario" value="{{user}}">
+            <iron-icon icon="icons:lock" slot="prefix"></iron-icon>
 
+          </paper-input>
+          <paper-input label="Contraseña" id="ps" type="password" value={{pass}} required error-message="Ingrese la contraseña">
 
-    </style>
+          <iron-icon icon="lock" slot="prefix"></iron-icon>
+          </paper-input>
+              <br>    <br>    <br>
+            <button class="buton" id="botonUpdate" on-click="iniciar">ENTRAR</button>
 
-    <div class="template">
-    <div class="">
-    <h1>Estás en Login-component</h1>
-    <input type="text" name="" placeholder="Ingresa tu usuario">
-    <input type="text" name="" placeholder="Ingresa tu contraseña">
-    <button class="botones" type="button" name="button" on-click="iniciar">Iniciar sesión</button>
+      </div>
     </div>
+    <div class="app" id="app" style="display: {{appvisible}} ">
+<agenda-usuario></agenda-usuario>
     </div>
-
-
 
   </template>
 
@@ -69,11 +114,91 @@
           prop1: {
             type: String,
             value: 'login-element'
+          },
+          user:{
+          type: String
+          },
+          pass:{
+            type: String,
+            value: ""
+          },
+          data:{
+            type: Object
+          },
+          loginvisible:{
+            type: String,
+          },
+          appvisible:{
+            type: String
           }
         };
       }
+
+    ready(){
+      super.ready();
+      var config = {
+         apiKey: "AIzaSyCvpbll8xQNis64mzRSP9wpcUQESECIwN8",
+         authDomain: "prfinal-d4e0d.firebaseapp.com",
+         databaseURL: "https://prfinal-d4e0d.firebaseio.com",
+         projectId: "prfinal-d4e0d",
+         storageBucket: "prfinal-d4e0d.appspot.com",
+         messagingSenderId: "801620956968",
+       };
+       //firebase.initializeApp();
+       this.data = firebase.initializeApp(config, "other");
+       this.loginvisible="flex";
+       this.appvisible="none";
+    }
       iniciar(){
-        document.body.innerHTML = `<agenda-usuario></agenda-usuario>`;
+
+        if(this.$.us.validate() && this.$.ps.validate()){
+
+        this.data.auth().signInWithEmailAndPassword(this.user, this.pass).then(
+        function (data){
+          document.activeElement.__data.appvisible="flex";
+          document.activeElement.__data.loginvisible="none";
+
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                    alert('Contraseña incorrecta.');
+                    this.pass="";
+            }
+            if (errorCode === 'auth/user-not-found') {
+                            alert('Usuario no valido.');
+                            this.user="";
+            }
+            if (errorCode === 'auth/user-disabled') {
+                            alert('Usuario deshabilitado.');
+                              this.user="";
+            }
+        });
+        /*
+        this.data.auth().onAuthStateChanged(function(user) {
+            var contactoObtenido=JSON.stringify(user);
+            if (user) {
+
+               document.getElementById('ps');
+               this.loginvisible="none";
+               this.appvisible="flex";
+                store.dispatch('loginvisible', "none");
+                store.dispatch('appvisible', "flex");
+
+              console.log(" autentifocado="+contactoObtenido);
+            }else{
+              console.log(" no autentifocado "+contactoObtenido);
+            }
+        });*/
+
+      }
+
+  //      document.body.innerHTML = `<agenda-usuario></agenda-usuario>`;
+      }
+      entrar(){
+        this.loginvisible="none";
+        this.appvisible="flex";
       }
     }
 
