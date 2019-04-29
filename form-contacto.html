@@ -1,8 +1,8 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel = "import" href = "bower_components/paper-input/paper-input.html">
-<link rel = "import" href="../bower_components/polymerfire/polymerfire.html">
-<link rel = "import" href="../bower_components/polymerfire/firebase.html">
-<link rel = "import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel = "import" href = "../paper-input/paper-input.html">
+<link rel = "import" href="../polymerfire/polymerfire.html">
+<link rel = "import" href="../polymerfire/firebase.html">
+<link rel = "import" href="../polymerfire/firebase-query.html">
 
 <dom-module id="form-contacto">
   <template>
@@ -152,6 +152,9 @@
           idcontacto: {
             type: String,
             value:"-LdVfjv7WLSfnApyydbp"
+          },
+          position:{
+            type: Number
           }
         };
       }
@@ -184,17 +187,17 @@
           this.$.botonUpdate.style.display = "inline-flex";
 
           var contactoObtenido=JSON.stringify(this.imprime);
-          var contactoObtenido=this.imprime;
-          const infoContacto = contactoObtenido.filter(dato => dato.$key == this.idcontacto);
-                this.nombre=infoContacto['0'].nombre;
-                this.appaterno=infoContacto['0'].apaterno;
-                this.apmaterno=infoContacto['0'].amaterno;
-                this.calle=infoContacto['0'].calle;
-                this.noint=infoContacto['0'].nointerior;
-                this.noext=infoContacto['0'].noexterior;
-                this.correo=infoContacto['0'].correo;
-                this.tel=infoContacto['0'].telefono;
-                this.imagen=infoContacto['0'].imagen;
+          var infoContacto=this.imprime;
+          // const infoContacto = contactoObtenido.filter(dato => dato.$key == this.idcontacto);
+                this.nombre=infoContacto[this.position].nombre;
+                this.appaterno=infoContacto[this.position].apaterno;
+                this.apmaterno=infoContacto[this.position].amaterno;
+                this.calle=infoContacto[this.position].calle;
+                this.noint=infoContacto[this.position].nointerior;
+                this.noext=infoContacto[this.position].noexterior;
+                this.correo=infoContacto[this.position].correo;
+                this.tel=infoContacto[this.position].telefono;
+                this.imagen=infoContacto[this.position].imagen;
         }
 
       }

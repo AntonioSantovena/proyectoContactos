@@ -5,6 +5,9 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../bower_components/polymerfire/firebase.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 
 <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
@@ -111,23 +114,40 @@
       }
     </style>
 
-    <iron-ajax
+    <!--iron-ajax
       id="getImageContact"
       url="../image.json"
       handle-as="json"
       content-type="application/json"
       last-response= "{{data}}">
-    </iron-ajax>
+    </iron-ajax-->
+
+    <firebase-app
+    proyect-id = "prfinal-d4e0d"
+     api-key= "AIzaSyCvpbll8xQNis64mzRSP9wpcUQESECIwN8"
+     auth-domain= "prfinal-d4e0d.firebaseapp.com"
+     database-url= "https://prfinal-d4e0d.firebaseio.com"
+     storage-bucket= "prfinal-d4e0d.appspot.com"
+     messaging-sender-id= "801620956968"
+     name="getDataPersonas">
+    </firebase-app>
+
+    <firebase-query
+    id="getPersonas"
+    app-name="getDataPersonas"
+    path="personas"
+    data="{{data}}"
+    ></firebase-query>
 
     <section>
       <paper-card>
         <div id="[[imageCurrent]]" style="box-shadow: -2px 15px 20px 5px rgba(0,0,0,.75);">
-          <template is="dom-repeat" items="[[data]]" as="itemData">
+          <template is="dom-repeat" items="[[data]]" as="personas">
             <template is="dom-if" if="[[_isEqual(imageCurrent, index)]]">
-              <img src="[[itemData.urlImage]]">
+              <img src="[[personas.imagen]]">
               <div class="name">
                 <div id="prev" data-img="prev" on-click="_changePreviousImage"></div>
-                  <label>[[itemData.name]]</label>
+                  <label>[[personas.nombre]]</label>
                 <div id="next" data-img="next" on-click="_changeNextImage"></div>
               </div>
             </template>
@@ -137,12 +157,16 @@
     </section>
     <button class="botones" type="button" name="button" on-click="_editContact">Editar Contacto</button>
   </template>
-  [[imageCurrent]]
   <script>
     class ComponentEdit extends Polymer.Element {
       static get is() { return 'component-edit'; }
       static get properties() {
         return {
+          prop1: {
+            type: String,
+            value: 'component-edit',
+            notify: true
+          },
           data: {
             type: Object
           },
@@ -152,18 +176,34 @@
           },
           position:{
             type: Number,
-            value: 0
+            value: 0,
+            notify: true
           },
           message:{
             type: String
+          },
+          idvalor:{
+            type: String,
+            value: "",
+            notify: true
+          },
+          visible:{
+            type: String,
+            value: "",
+            notify: true
+          },
+          tipo:{
+            type: String,
+            value:"",
+            notify:true
           }
         };
       }
 
-      ready() {
-        super.ready();
-        this.$.getImageContact.generateRequest();
-      }
+      // ready() {
+      //   super.ready();
+      //   this.$.getImageContact.generateRequest();
+      // }
 
       _isEqual(imageCurrent, index) {
         return imageCurrent == index
@@ -192,7 +232,10 @@
       }
 
       _editContact(){
-        console.log(this.position);
+        this.idvalor = this.data[this.position].$key;
+        this.visible="flex";
+        this.tipo="edit";
+        console.log(this.data[this.position].$key);
       }
     }
 

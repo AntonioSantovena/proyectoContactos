@@ -147,9 +147,7 @@
         <button class="botones" type="button" name="button" on-click="nuevoRegistro">Nuevo contacto</button>
       </div>
       <div class="section1">
-
-        <component-edit></component-edit>
-        <!---->
+       <component-edit idvalor="{{idvalor}}" visible="{{visible}}" tipo="{{tipo}}" position="{{position}}"></component-edit>
       </div>
       <div class="section2">
         <list-contactos></list-contactos>
@@ -157,7 +155,7 @@
     </div>
     <div class="modal" id="modal" style="display: {{visible}}">
       <div class="tablanuevo" id="tablanuevo">
-        <form-contacto id="formcomponent"  salida="{{visible}}" tipo="{{tipo}}"></form-contacto>
+        <form-contacto id="formcomponent"  salida="{{visible}}" tipo="{{tipo}}" idcontacto="{{idvalor}}" position="{{position}}"></form-contacto>
       </div>
     </div>
   </template>
@@ -189,6 +187,13 @@
           datos: {
             type: Object,
             observer: 'ver'
+          },
+          idvalor:{
+            type: String
+          },
+          position:{
+            type: Number,
+            value: 0
           }
         };
       }
