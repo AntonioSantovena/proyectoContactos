@@ -52,7 +52,7 @@ backgroun-repeat: no-repeat;
           border: 0 none;
           border-radius: 1px;
           cursor: pointer;
-          padding: 5% 35%;
+          padding: 10px 5px;
           margin: 10px 5px;
           justify-content: center;
           text-align: center;
@@ -61,6 +61,9 @@ backgroun-repeat: no-repeat;
           width: 40%;
         }
         .app{
+          background-image: url('imagenFondo.jpg');
+          background-size:100% 100%;
+          backgroun-repeat: no-repeat;
 
         position:fixed;
         justify-content: center;
@@ -75,7 +78,7 @@ backgroun-repeat: no-repeat;
       </style>
     <div class="login" id="login" style="display: {{loginvisible}}">
       <div class="tablanuevo" id="tablanuevo">
-        <h2>BIENVENIDO</h2>{{loginvisible}} {{appvisible}}
+        <h2>BIENVENIDO</h2>
         <img src="../img/contacto-login.png" class="img" />
         <br>    <br>
           <paper-input  id ="us" label="Usuario" required error-message="Ingrese el usuario" value="{{user}}">
