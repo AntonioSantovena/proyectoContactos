@@ -38,11 +38,11 @@
       Editar Contacto
     </h2>
 
-    <!--image-input id="ii2" url="{{imageUrl}}" placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAG1BMVEUAAAD///9/f38/Pz8fHx9fX1+/v7+fn5/f39+rr0+4AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABWUlEQVRoge2TT2+CMBiHX6GoR5L5AYhu6pGEiNduYQlHIod5NNvsdjRmsqvb9Huv4CYVyp9l199zIPBr+7xt30AEAAAAAAAAAACAdhhO/fh4nU6pmdUg6L2xBkEDnVZlaggbBSZn7iJiQ5doNhkR3W3diMzJtSIweSrIs0sMxxjHWz9+JGsdLyPr6L0fKImXbjaafIjfSzxnZcEV9Z9PezVXfVltYGyI7fMdZAIlKwk21HVIrpTYvnwM0vengkDJSgKHehF1ObHZ0J6nlvTqdxQEXBGcsnrBeOTZISdrdSuE+DSFPH4uyLJ6gTwK2cbRm/IwHz4LQt3iS4E8JbP797KhHY2g00pg2Nldys+SQMmqBD2HHvbmq9gR+yLiBYGSVQmYSJw9EZuvyH9JNgWBklXCfirIdgeaYrpMj7bdf4Ad/rPav/Gm2n+mdfnFtqpfAAAAAAAAANCKb8w3PQYNl7XnAAAAAElFTkSuQmCC">
-      </image-input>
-      {{imageUrl}}
+    <paper-input id="ii2" type="file">
+      </paper-input>
+      <!--button type="" name="button"></button>
 
-    <div id="output">
+    <!--div id="output">
       image url:
     </div-->
 
@@ -175,9 +175,18 @@
       }
       ready() {
         super.ready();
-        this.$.ii2.addEventListener('changed-files', function(event) {
+        //this.$.ii2.addEventListener('changed-files', function(event) {
+          //this.nombreimgane(event);
           //  this.shadowRoot.ownerDocument.activeElement.$.output.innerHTML = JSON.stringify(event.target.url);
-          });
+        //});
+      }
+      nombreimgane(){
+        var str= this.$.ii2.value;
+        var arr = str.split("\\");
+        console.log(arr[2]);
+        var arr2 = arr[2].split(".");
+      this.$.image.value= arr2[0];
+        //console.log(this.$.ii2.inputElemnt.inputElemnt.files[0]);
       }
       validaTipo(){
         var valor= this.idcontacto;
@@ -222,7 +231,7 @@
         this.salida = 'none';
       }
       agregar(){
-       this.$.ii2.url;
+this.nombreimgane();
         //let photo = document.getElementById("image-file").files[0];  // file from input
         /*let req = new XMLHttpRequest();
         let formData = new FormData();
