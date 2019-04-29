@@ -1,8 +1,10 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel = "import" href = "../paper-input/paper-input.html">
-<link rel = "import" href="../polymerfire/polymerfire.html">
-<link rel = "import" href="../polymerfire/firebase.html">
-<link rel = "import" href="../polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel = "import" href = "bower_components/paper-input/paper-input.html">
+<link rel = "import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase.html">
+<link rel = "import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel = "import" href="../bower_components/file-input/image-input.html">
+<link rel = "import" href="../bower_components/file-input/file-input.html">
 
 <dom-module id="form-contacto">
   <template>
@@ -33,6 +35,13 @@
       Editar Contacto
     </h2>
 
+    <image-input id="ii2" url="{{imageUrl}}" placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAG1BMVEUAAAD///9/f38/Pz8fHx9fX1+/v7+fn5/f39+rr0+4AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABWUlEQVRoge2TT2+CMBiHX6GoR5L5AYhu6pGEiNduYQlHIod5NNvsdjRmsqvb9Huv4CYVyp9l199zIPBr+7xt30AEAAAAAAAAAACAdhhO/fh4nU6pmdUg6L2xBkEDnVZlaggbBSZn7iJiQ5doNhkR3W3diMzJtSIweSrIs0sMxxjHWz9+JGsdLyPr6L0fKImXbjaafIjfSzxnZcEV9Z9PezVXfVltYGyI7fMdZAIlKwk21HVIrpTYvnwM0vengkDJSgKHehF1ObHZ0J6nlvTqdxQEXBGcsnrBeOTZISdrdSuE+DSFPH4uyLJ6gTwK2cbRm/IwHz4LQt3iS4E8JbP797KhHY2g00pg2Nldys+SQMmqBD2HHvbmq9gR+yLiBYGSVQmYSJw9EZuvyH9JNgWBklXCfirIdgeaYrpMj7bdf4Ad/rPav/Gm2n+mdfnFtqpfAAAAAAAAANCKb8w3PQYNl7XnAAAAAElFTkSuQmCC">
+      </image-input>
+      {{imageUrl}}
+
+    <div id="output">
+      image url:
+    </div>
 
     <table class="tabla">
   <!----    <tr>
@@ -53,6 +62,9 @@
     <td class="input-form"><paper-input  id ="calle-input"  label="Calle"  value="{{calle}}"></paper-input></td>
     <td class="input-form"><paper-input  id="numeroint"  label="Numero interior"  value="{{noint}}"></paper-input> </td>
     <td class="input-form"><paper-input  id="numeroext"  label="Numero exterior"  value="{{noext}}"></paper-input>
+  </td>
+  <tr>
+    <td class="input-form"  colspan="2"><paper-input  id="image"  label="Nombre de la imagen"  value="{{imagen}}"></paper-input>
   </td>
 
   </tr>
@@ -157,6 +169,12 @@
             type: Number
           }
         };
+      }
+      ready() {
+        super.ready();
+        this.$.ii2.addEventListener('changed-files', function(event) {
+          //  this.shadowRoot.ownerDocument.activeElement.$.output.innerHTML = JSON.stringify(event.target.url);
+          });
       }
       validaTipo(){
         var valor= this.idcontacto;
